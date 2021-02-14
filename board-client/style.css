@@ -1,0 +1,62 @@
+body{
+    padding: 0px;
+    margin: 0px;
+    touch-action: none;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #3c156d;
+    touch-action: none;
+}
+
+.board {
+    position: relative;
+    width: 300px;
+    height: 500px;
+    background-color: #4b1d85;
+    border-radius: 50px;
+    touch-action: none;
+}
+
+.pawn{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    touch-action: none;
+}
+
+.circle{
+    background-color: #cc20e1;
+    border-radius: 100%;
+}
+
+.triangle{
+    width: 0;
+    height: 0;
+    border-left: 26px solid transparent;
+    border-right: 26px solid transparent;
+    border-bottom: 46px solid brown;
+}
+
+.square{
+    background-color: blue;
+}
+
+.pane{
+    background-color: orange;
+    transform: rotate(135deg);
+}
+
+/* 
+circle
+triangle
+square
+pane */
