@@ -5,7 +5,7 @@
   "main": "move.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --open",
+    "dev": "webpack-dev-server --open --port 3000",
     "build": "webpack"
   },
   "author": "",
@@ -18,8 +18,6 @@
     "popper.js": "^1.16.1",
     "postcss-loader": "^3.0.0",
     "raw-loader": "^4.0.1",
-    "sass-loader": "^8.0.2",
-    "scss-loader": "0.0.1",
     "style-loader": "^1.1.4",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
@@ -39,8 +37,6 @@
     "popper.js": "^1.16.1",
     "postcss-loader": "^3.0.0",
     "raw-loader": "^4.0.1",
-    "sass-loader": "^8.0.2",
-    "scss-loader": "0.0.1",
     "style-loader": "^1.1.4",
     "webpack": "^4.41.2",
     "webpack-dev-server": "^3.11.2",
