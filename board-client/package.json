@@ -2,10 +2,11 @@
   "name": "board-client",
   "version": "1.0.0",
   "description": "",
-  "main": "move.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --open --port 3000",
+    "dev": "webpack-dev-server --open --port 3001",
+    "start": "webpack-dev-server --host 0.0.0.0 --inline --content-base .",
     "build": "webpack"
   },
   "author": "",
