@@ -64,6 +64,7 @@ This  small project shows how to use WebSocket for real time DOM manipulation.
 * [Babel](https://babeljs.io/)
 * [Docker](https://www.docker.com/)
 * [Jenkins](https://www.jenkins.io/)
+* [Helm](https://helm.sh/)
 
 
 <!-- GETTING STARTED -->
