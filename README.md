@@ -151,6 +151,7 @@ Contributions are what make the open source community such an amazing place to b
 
 Katarzyna Petka - katarzyna.petka@sap.com
 
+
 Patryk Musiol  - patryk.musiol@sap.com
 
 
