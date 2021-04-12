@@ -11,7 +11,7 @@
   <p align="center">
     Wysyłanie websocketowej aplikacji Jenkinsem w chmury
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>More about HYC »</strong></a>
+    <a href="https://hackyourcareer.github.io/"><strong>More about HYC »</strong></a>
     <br />
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
