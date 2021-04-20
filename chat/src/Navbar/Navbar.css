@@ -1,0 +1,12 @@
+.bg-teal {
+  background-color: rgb(16, 147, 156);
+}
+
+.logo {
+  width: 180px;
+}
+
+.title {
+  text-decoration: none;
+  font-size: 2.1rem;
+}

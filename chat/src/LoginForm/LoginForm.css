@@ -1,0 +1,10 @@
+.btn-outline-teal {
+  border-color: rgb(16, 147, 156);
+  color: black;
+}
+
+.btn-outline-teal:hover {
+  border-color: rgb(16, 147, 156);
+  background-color: rgb(16, 147, 156);
+  color: white;
+}
