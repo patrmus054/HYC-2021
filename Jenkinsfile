@@ -28,7 +28,7 @@ pipeline {
 					docker push $IMAGE_NAME_CHAT
 
 					docker logout 
-					docker login -u i529998 -p #MdouTCJg246
+					docker login -u i529998 -p '#MdouTCJg246'
 					docker build -t storefront:latest .
 					docker tag storefront:latest i529998/storefront:latest
 					docker push i529998/storefront:latest
@@ -56,7 +56,7 @@ pipeline {
 					docker push $IMAGE_NAME_BOARD_SERVER
 
 					docker logout 
-					docker login -u i529998 -p #MdouTCJg246
+					docker login -u i529998 -p '#MdouTCJg246'
 					docker build -t backend:latest .
 					docker tag beckend:latest i529998/backend:latest
 					docker push i529998/backend:latest
