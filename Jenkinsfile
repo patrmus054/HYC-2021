@@ -61,7 +61,7 @@ pipeline {
 					docker login -u i529998 -p '#MdouTCJg246'
 					cd ./board-server
 					docker build -t backend:latest .
-					docker tag beckend:latest i529998/backend:latest
+					docker tag backend:latest i529998/backend:latest
 					docker push i529998/backend:latest
 					cd ..
 					'''
