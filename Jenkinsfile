@@ -47,13 +47,13 @@ pipeline {
 					ACR_PASSWORD="yhQj0LuE7SO18Y0wdeRKmhtP/UNdHsdF"
 
 					IMAGE_NAME_BOARD_SERVER="$ACR_LOGINSERVER/board-server:jenkins${BUILD_NUMBER}"
-					IMAGE_NAME_BACKEND_DOCKERHUB="
+					
 
 					
 					cd ./board-server
 					docker build -t $IMAGE_NAME_BOARD_SERVER .
 					cd ..
-					
+					docker logout
 					docker login $ACR_LOGINSERVER -u $ACR_ID -p $ACR_PASSWORD
 					docker push $IMAGE_NAME_BOARD_SERVER
 
