@@ -1,0 +1,43 @@
+.jumbo-chat {
+  padding-top: 30px;
+  background-repeat: no-repeat;
+  height: 25vh;
+  margin-top: 10px;
+  background-position-x: 70%;
+  z-index: -1;
+  background-image: url("../assets/chat2.png");
+}
+
+.btn-teal {
+  background-color: rgb(16, 147, 156);
+  color: white;
+  font-size: 1.7rem;
+}
+
+.btn-teal:hover {
+  border-color: rgb(16, 147, 156);
+  background-color: white;
+}
+
+.message {
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.my-message {
+  background-color: rgb(16, 147, 156);
+  color: white;
+
+  align-items: flex-end;
+}
+
+.received-message {
+  border: 1px solid rgb(16, 147, 156);
+  align-items: flex-start;
+}
+
+.messages {
+  overflow-y: auto;
+  max-height: 500px;
+}

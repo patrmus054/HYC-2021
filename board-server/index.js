@@ -1,74 +1,89 @@
-const WebSocket = require('ws');
-
-const wss = new WebSocket.Server({ port: 8080 });
-
-const storage = {
-  circle: {
-    top: 0,
-    left: 0,
-    occupied: false
+const express = require("express");
+const jwt = require("jsonwebtoken");
+const cors = require("cors");
+const app = express();
+const server = require("http").createServer(app);
+const bodyParser = require("body-parser");
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
   },
-  triangle: {
-    top: 0,
-    left: 0,
-    occupied: false
-  },
-  square: {
-    top: 0,
-    left: 0,
-    occupied: false
-  },
-  pane: {
-    top: 0,
-    left: 0,
-    occupied: false
-  }
-};
+});
+const { randomBytes } = require("crypto");
+const requireLogin = require("./requireLogin");
+app.use(bodyParser.json());
+app.use(cors());
+const messagesByRoom = {};
+const users = {};
 
-const setOccupied = (payload) => {
-  storage[payload.id].occupied = payload.occupied;
-};
+const PORT = 3030;
+const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
 
-const setPosition = (payload) => {
-  storage[payload.id].top = payload.top;
-  storage[payload.id].left = payload.left;
-};
+app.get("/messages/:roomId", requireLogin, (req, res) => {
+  res.send(messagesByRoom[req.params.roomId] || []);
+});
 
-const handleNewMessage = async (message) => {
+app.post("/messages/:roomId", requireLogin, (req, res) => {
+  console.log("in");
+  const { content, from } = req.body;
+  const messages = messagesByRoom[req.params.roomId] || [];
+
+  messages.push({ from, content });
+  messagesByRoom[req.params.roomId] = messages;
+
+  res.status(201).send(messages);
+});
+
+app.post("/login", (req, res) => {
   try {
-    const parsedMessage = await JSON.parse(message);
-    switch (parsedMessage.type) {
-      case 'occupied':
-        setOccupied(parsedMessage.payload);
-        break;
-      case 'position':
-        setPosition(parsedMessage.payload);
-        break;
-      default:
-        console.log('wrong message type');
+    const password = req.body.password;
+    const name = req.body.name;
+    //Check if password is given
+    if (!password) return res.status(400).send("Give password!");
+
+    const user = users[name];
+    if (!user) {
+      users[name] = { name, password };
+    } else if (user?.password !== password) {
+      return res.status(400).send("Wrong password!");
     }
-  } catch (e) {
-    console.log('Message is no JSON type');
+
+    //Create and assign token for 2h
+    const token = jwt.sign(
+      {
+        _name: name,
+        exp: Math.floor(Date.now() / 1000) + 60 * 60 * 2,
+      },
+      "dqwiu38982u3hriuhwjnjrkwehrwir847w8rh"
+    );
+
+    res.header("token", token).send(token);
+  } catch (err) {
+    res.status(400).send(err);
   }
-};
+});
 
-const getStringStorage = () => {
-  const stringifiedState = JSON.stringify(storage);
-  console.log(stringifiedState);
-  return stringifiedState;
-};
+io.on("connection", (socket) => {
+  // Join a conversation
+  const { roomId, name } = socket.handshake.query;
 
-const broadcast = (message) => {
-  wss.clients.forEach((client) => {
-    client.send(message);
-  });
-};
+  const id = randomBytes(4).toString("hex");
 
-wss.on('connection', (ws) => {
-  ws.on('message', async (message) => {
-    await handleNewMessage(message);
-    broadcast(getStringStorage());
+  console.log(id, name);
+
+  socket.join(roomId);
+
+  // Listen for new messages
+  socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
+    io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
   });
 
-  ws.send(getStringStorage());
+  // Leave the room if the user closes the socket
+  socket.on("disconnect", () => {
+    socket.leave(roomId);
+  });
+});
+
+server.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
 });
