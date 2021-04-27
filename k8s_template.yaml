@@ -1,4 +1,20 @@
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: myAccount
+---
+apiVersion: v1
+kind: RoleBinding
+metadata:
+  name: myBinding
+roleRef:
+  kind: Role
+  name: developer
+subjects:
+- kind: ServiceAccount
+  name: myAccount
+---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -44,6 +60,7 @@ spec:
         image: docker.io/i529998/backend
         ports:
         - containerPort: 3030
+      serviceAccountName: myAccount
 ---
 apiVersion: v1
 kind: Service
