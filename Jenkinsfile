@@ -29,9 +29,11 @@ pipeline {
 
 					docker logout 
 					docker login -u i529998 -p '#MdouTCJg246'
+					cd ./chat
 					docker build -t storefront:latest .
 					docker tag storefront:latest i529998/storefront:latest
 					docker push i529998/storefront:latest
+					cd ..
 					'''
 			}
 	    }
@@ -57,9 +59,11 @@ pipeline {
 
 					docker logout 
 					docker login -u i529998 -p '#MdouTCJg246'
+					cd ./board-server
 					docker build -t backend:latest .
 					docker tag beckend:latest i529998/backend:latest
 					docker push i529998/backend:latest
+					cd ..
 					'''
 			}
 	    }
