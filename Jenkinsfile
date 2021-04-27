@@ -4,16 +4,15 @@ pipeline {
 		
 	stages {
 		
-		stage ('azure-voting-app-redis - Checkout') {
+		stage ('git checkout') {
 			steps {
 					checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/patrmus054/HYC-2021']]])
 			}
 		}
-		stage ('Docker Build chat and Push to ACR'){
+		stage ('Docker Build frontend and Push to ACR & Docker Hub'){
 			steps{
 					
-					sh '''
-					
+					sh '''				
 					REPO_NAME="HYC-2021"
 					ACR_LOGINSERVER="hyccontainerregistry.azurecr.io"
 					ACR_ID="hycContainerRegistry"
@@ -27,19 +26,26 @@ pipeline {
 					
 					docker login $ACR_LOGINSERVER -u $ACR_ID -p $ACR_PASSWORD
 					docker push $IMAGE_NAME_CHAT
+
+					docker logout 
+					docker login -u i529998 -p #MdouTCJg246
+					docker build -t storefront:latest .
+					docker tag storefront:latest i529998/storefront:latest
+					docker push i529998/storefront:latest
 					'''
 			}
 	    }
-        stage ('Docker Build board-server and Push to ACR'){
+        stage ('Docker Build backend and Push to ACR & Docker Hub'){
 			steps{
 					
 					sh '''
-					
 					REPO_NAME="HYC-2021"
 					ACR_LOGINSERVER="hyccontainerregistry.azurecr.io"
 					ACR_ID="hycContainerRegistry"
 					ACR_PASSWORD="yhQj0LuE7SO18Y0wdeRKmhtP/UNdHsdF"
+
 					IMAGE_NAME_BOARD_SERVER="$ACR_LOGINSERVER/board-server:jenkins${BUILD_NUMBER}"
+					IMAGE_NAME_BACKEND_DOCKERHUB="
 
 					
 					cd ./board-server
@@ -48,6 +54,12 @@ pipeline {
 					
 					docker login $ACR_LOGINSERVER -u $ACR_ID -p $ACR_PASSWORD
 					docker push $IMAGE_NAME_BOARD_SERVER
+
+					docker logout 
+					docker login -u i529998 -p #MdouTCJg246
+					docker build -t backend:latest .
+					docker tag beckend:latest i529998/backend:latest
+					docker push i529998/backend:latest
 					'''
 			}
 	    }
