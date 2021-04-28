@@ -95,6 +95,7 @@ pipeline {
 		stage ('Deploy changes to k8s'){
 			steps{
 			sh '''
+			kubectl get po 
 			kubectl apply -f ./k8s_template.yaml --token myToken
 			'''	
 			}
