@@ -96,7 +96,7 @@ pipeline {
 			steps{
 			sh '''
 			kubectl version
-			kubectl get pod
+			kubectl get pods
 			kubectl apply -f ./k8s_template.yaml --token myToken
 			'''	
 			}
