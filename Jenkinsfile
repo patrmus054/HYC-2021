@@ -67,31 +67,7 @@ pipeline {
 					'''
 			}
 	    }
-	    // stage ('Helm Deploy to K8s'){
-		// 	steps{
-		// 			sh '''
-                    
-		// 			REPO_NAME="HYC-2021"
-		// 			ACR_LOGINSERVER="hyccontainerregistry.azurecr.io"
 
-                	
-		// 			NAME="HYC-2021"
-		// 			HELM_CHART="./helm/HYC-2021"
-					
-					
-		// 			KUBE_CONTEXT="HYC-2021"
-		// 			kubectl config --kubeconfig=/var/lib/jenkins/.kube/config view
-		// 			kubectl config set-context $KUBE_CONTEXT
-					
-					
-		// 			helm --kube-context $KUBE_CONTEXT upgrade --install --force $NAME $HELM_CHART --set image.repository=$ACR_LOGINSERVER/board-server --set image.tag=jenkins${BUILD_NUMBER} 
-		// 			helm --kube-context $KUBE_CONTEXT upgrade --install --force $NAME $HELM_CHART --set image.repository=$ACR_LOGINSERVER/chat --set image.tag=jenkins${BUILD_NUMBER}
-
-		// 			#If credentials are required for pulling docker image, supply the credentials to AKS by running the following:
-		// 			#kubectl create secret -n $NAME docker-registry regcred --docker-server=$ACR_LOGINSERVER --docker-username=$ACR_ID --docker-password=$ACR_PASSWORD 
-		// 			'''
-		// 		}
-		// }
 		stage ('Deploy changes to k8s'){
 			steps{
 			sh '''
