@@ -95,6 +95,10 @@ pipeline {
 		stage ('Deploy changes to k8s'){
 			steps{
 			sh '''
+			KUBE_CONTEXT="HYC-2021"
+			kubectl config --kubeconfig=/var/lib/jenkins/.kube/config view
+			kubectl config set-context $KUBE_CONTEXT
+
 			kubectl version
 			kubectl get pods
 			kubectl apply -f ./k8s_template.yaml --token myToken
