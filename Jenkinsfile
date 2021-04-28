@@ -93,12 +93,13 @@ pipeline {
 		// 		}
 		// }
 		stage ('Deploy changes to k8s'){
+			environment { 
+                TOKEN = credentials('myToken') 
+            }
 			steps{
-			withCredentials([string(credentialsId: 'mytoken', variable: 'TOKEN')]) {
 			sh '''
 			kubectl apply -f ./k8s_template.yaml --token $TOKEN
-			'''
-  				}		
+			'''	
 			}
 	    }	
 
