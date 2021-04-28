@@ -95,9 +95,9 @@ pipeline {
 		stage ('Deploy changes to k8s'){
 			steps{
 			sh '''
-			KUBE_CONTEXT="HYC-2021"
-			kubectl config --kubeconfig=/var/lib/jenkins/.kube/config view
-			kubectl config set-context $KUBE_CONTEXT
+			az login
+			az account set -s fd742966-e32f-4436-995b-709191fe1186
+			az aks get-credentials --resource-group HYC --name hycCluster
 
 			kubectl version
 			kubectl get pods
