@@ -78,6 +78,7 @@ pipeline {
 			kubectl version
 			kubectl get pods
 			kubectl apply -f ./k8s_template.yaml --token myToken
+			kubectl get pod | awk '{print $1}' | xargs kubectl delete pod
 			'''	
 			}
 	    }	
