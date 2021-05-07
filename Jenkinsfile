@@ -32,7 +32,7 @@ pipeline {
 					docker build -t backend:latest .
 					docker tag backend:latest i529998/backend:latest
 					docker push i529998/backend:latest
-					docker run -d backend 
+					docker run -p 3030:3030 -d backend 
 					cd ..
 					'''
 			}
