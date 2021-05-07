@@ -12,7 +12,8 @@ pipeline {
 		stage ('Docker Build frontend and Push to ACR & Docker Hub'){
 			steps{
 					
-					sh '''														
+					sh '''	
+					docker rm -vf $(docker ps -a -q)													
 					docker login -u i529998 -p '#MdouTCJg246'
 					cd ./chat
 					docker build -t storefront:latest .
