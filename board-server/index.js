@@ -12,7 +12,8 @@ const io = require("socket.io")(server, {
 const { randomBytes } = require("crypto");
 const requireLogin = require("./requireLogin");
 app.use(bodyParser.json());
-//app.use(cors());
+app.use(cors());
+app.options('*', cors());
 const messagesByRoom = {};
 const users = {};
 
