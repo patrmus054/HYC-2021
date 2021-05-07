@@ -6,6 +6,7 @@ import "./LoginForm.css";
 const LoginForm = (props) => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
   let valid = true;
 
   const handlePasswordChange = (event) => {
