@@ -18,7 +18,7 @@ pipeline {
 					docker build -t storefront:latest .
 					docker tag storefront:latest i529998/storefront:latest
 					docker push i529998/storefront:latest
-					docker run -p 3001:3000 storefront -d
+					docker run -p 3001:3000 -d storefront 
 					cd ..
 					'''
 			}
@@ -32,7 +32,7 @@ pipeline {
 					docker build -t backend:latest .
 					docker tag backend:latest i529998/backend:latest
 					docker push i529998/backend:latest
-					docker run backend -d
+					docker run -d backend 
 					cd ..
 					'''
 			}
