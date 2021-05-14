@@ -3,6 +3,7 @@ import useChat from "../useChat";
 import "./ChatRoom.css";
 import { RiSendPlaneLine as Send } from "react-icons/ri";
 import axios from "axios";
+import Messages from "./Messages";
 
 const ChatRoom = (props) => {
   const { roomId } = props.match.params; // Gets roomId from URL
@@ -34,6 +35,12 @@ const ChatRoom = (props) => {
     setNewMessage(event.target.value);
   };
 
+  const handleKeyPressed = (event) => {
+    if (event.key === "Enter") {
+      handleSendMessage();
+    }
+  };
+
   const handleSendMessage = async () => {
     let headers = {
       headers: { token: token },
@@ -47,8 +54,10 @@ const ChatRoom = (props) => {
         },
         headers
       );
-      sendMessage(newMessage, name);
-      setNewMessage("");
+      if (newMessage.trim().length !== 0) {
+        sendMessage(newMessage, name);
+        setNewMessage("");
+      }
     } catch (error) {
       sessionStorage.removeItem("name");
       sessionStorage.removeItem("token");
@@ -70,49 +79,17 @@ const ChatRoom = (props) => {
         </div>
       </div>
       <div className="container ">
-        <div className="messages">
-          {olderMessages.map((olderMessage, i) => (
-            <div
-              key={i}
-              className={`flex flex-column ${
-                olderMessage.from === name ? "flex-bottom" : "flex-top"
-              }`}
-            >
-              {olderMessage.from === name ? null : olderMessage.from}
-              <span
-                key={i}
-                className={`message ${
-                  olderMessage.from === name ? "my-message" : "received-message"
-                }`}
-              >
-                {olderMessage.content}
-              </span>
-            </div>
-          ))}
-          <hr />
-          {messages.map((message, i) => (
-            <div
-              key={i}
-              className={`flex flex-column ${
-                message.ownedByCurrentUser ? "flex-bottom" : "flex-top"
-              }`}
-            >
-              {message.ownedByCurrentUser ? null : message.name}
-              <span
-                key={i}
-                className={`message ${
-                  message.ownedByCurrentUser ? "my-message" : "received-message"
-                }`}
-              >
-                {message.body}
-              </span>
-            </div>
-          ))}
-        </div>
+        <Messages
+          olderMessages={olderMessages}
+          messages={messages}
+          name={name}
+        />
+
         <div className="input-group mt-1">
           <textarea
             value={newMessage}
             onChange={handleNewMessageChange}
+            onKeyPress={handleKeyPressed}
             placeholder="Write message..."
             className="form-control"
           />{" "}
