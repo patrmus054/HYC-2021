@@ -18,12 +18,21 @@ const Messages = ({ olderMessages, messages, name }) => {
             olderMessage.from === name ? "flex-bottom" : "flex-top"
           }`}
         >
-          {olderMessage.from === name ? null : olderMessage.from}
+          {olderMessage.from === name ||
+          olderMessage.from === olderMessages[i - 1]?.from
+            ? null
+            : olderMessage.from}
           <span
             key={i}
             className={`message text-break ${
               olderMessage.from === name ? "my-message" : "received-message"
-            }`}
+            }
+            ${
+              olderMessage.from === olderMessages[i - 1]?.from
+                ? "message-merged"
+                : ""
+            }
+            `}
           >
             {olderMessage.content}
           </span>
@@ -37,12 +46,16 @@ const Messages = ({ olderMessages, messages, name }) => {
             message.ownedByCurrentUser ? "flex-bottom" : "flex-top"
           }`}
         >
-          {message.ownedByCurrentUser ? null : message.name}
+          {message.ownedByCurrentUser || message.name === messages[i - 1]?.name
+            ? null
+            : message.name}
           <span
             key={i}
             className={`message text-break ${
               message.ownedByCurrentUser ? "my-message" : "received-message"
-            }`}
+            }
+            ${message.name === messages[i - 1]?.name ? "message-merged" : ""}
+            `}
           >
             {message.body}
           </span>
