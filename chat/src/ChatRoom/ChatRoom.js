@@ -45,7 +45,7 @@ const ChatRoom = (props) => {
       setTimeout(() => {
         setPressed(false);
         inputRef.current.focus();
-      }, 300);
+      }, 200);
     }
   };
 

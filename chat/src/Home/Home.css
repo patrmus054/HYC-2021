@@ -31,3 +31,8 @@
     background-image: url("../assets/chatmobile.png");
   }
 }
+@media (max-width: 500px) {
+  .jumbo {
+    height: 40vh;
+  }
+}
