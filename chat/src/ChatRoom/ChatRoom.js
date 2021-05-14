@@ -54,15 +54,15 @@ const ChatRoom = (props) => {
       headers: { token: token },
     };
     try {
-      const res = await axios.post(
-        `/messages/${roomId}`,
-        {
-          content: newMessage,
-          from: name,
-        },
-        headers
-      );
       if (newMessage.trim().length !== 0) {
+        const res = await axios.post(
+          `/messages/${roomId}`,
+          {
+            content: newMessage,
+            from: name,
+          },
+          headers
+        );
         sendMessage(newMessage, name);
         setNewMessage("");
       }
