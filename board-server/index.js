@@ -13,7 +13,7 @@ const { randomBytes } = require("crypto");
 const requireLogin = require("./requireLogin");
 app.use(bodyParser.json());
 app.use(cors());
-app.options('*', cors());
+app.options("*", cors());
 const messagesByRoom = {};
 const users = {};
 
@@ -43,8 +43,10 @@ app.post("/login", (req, res) => {
     if (!password) return res.status(400).send("Give password!");
 
     const user = users[name];
+    let firstLogin = false;
     if (!user) {
       users[name] = { name, password };
+      firstLogin = true;
     } else if (user?.password !== password) {
       return res.status(400).send("Wrong password!");
     }
@@ -58,7 +60,7 @@ app.post("/login", (req, res) => {
       "dqwiu38982u3hriuhwjnjrkwehrwir847w8rh"
     );
 
-    res.header("token", token).send(token);
+    res.header("token", token).send({ token: token, firstLogin: firstLogin });
   } catch (err) {
     res.status(400).send(err);
   }

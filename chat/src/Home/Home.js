@@ -5,7 +5,7 @@ import "./Home.css";
 const Home = () => {
   const [roomName, setRoomName] = React.useState("");
   const name = sessionStorage.getItem("name");
-
+  const firstLogin = sessionStorage.getItem("firstLogin") === "true";
   const handleRoomNameChange = (event) => {
     setRoomName(event.target.value);
   };
@@ -25,11 +25,19 @@ const Home = () => {
         </div>
       </div>
       <div className="container">
-        <p className="lead">Hello again!</p>
+        <p className="lead">
+          {firstLogin ? "Welcome to Chatty!" : "Hello again!"}
+        </p>
 
         <div className="input-group mb-3">
           <span className="form-control">{name}</span>
         </div>
+        <p className="lead">
+          {firstLogin
+            ? "Your account has been created, You can start chatting."
+            : null}
+        </p>
+
         <p className="lead">Type a room You want to join.</p>
         <div className="input-group mb-3">
           <input

@@ -1,10 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { RiMailStarFill as Logo } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import "../Flex.css";
+import { AuthContext } from "../auth-context";
 
 const Navbar = () => {
+  const auth = useContext(AuthContext).auth;
+
+  useEffect(() => {}, [auth]);
+
+  const renderContent = () => {
+    switch (auth) {
+      case true:
+        return (
+          <span
+            className="btn text-white"
+            style={{ position: "absolute", right: 20 }}
+            onClick={logout}
+          >
+            Logout
+          </span>
+        );
+      default:
+        return;
+    }
+  };
+
   const logout = () => {
     sessionStorage.removeItem("name");
     sessionStorage.removeItem("token");
@@ -18,17 +40,11 @@ const Navbar = () => {
           className="text-light title flex flex-middle flex-justify-around"
         >
           <Logo />
-          Bershke
+          Chatty
         </Link>
       </div>
 
-      <span
-        className="btn text-white"
-        style={{ position: "absolute", right: 20 }}
-        onClick={logout}
-      >
-        Logout
-      </span>
+      {renderContent()}
     </nav>
   );
 };
