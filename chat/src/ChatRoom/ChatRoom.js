@@ -39,7 +39,7 @@ const ChatRoom = (props) => {
   };
 
   const handleKeyPressed = (event) => {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && ewMessage.trim().length !== 0) {
       setPressed(true);
       handleSendMessage();
       setTimeout(() => {
