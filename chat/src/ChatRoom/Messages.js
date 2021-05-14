@@ -21,7 +21,7 @@ const Messages = ({ olderMessages, messages, name }) => {
           {olderMessage.from === name ? null : olderMessage.from}
           <span
             key={i}
-            className={`message ${
+            className={`message text-break ${
               olderMessage.from === name ? "my-message" : "received-message"
             }`}
           >
@@ -40,7 +40,7 @@ const Messages = ({ olderMessages, messages, name }) => {
           {message.ownedByCurrentUser ? null : message.name}
           <span
             key={i}
-            className={`message ${
+            className={`message text-break ${
               message.ownedByCurrentUser ? "my-message" : "received-message"
             }`}
           >

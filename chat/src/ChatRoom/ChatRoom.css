@@ -4,6 +4,7 @@
   height: 25vh;
   margin-top: 10px;
   background-position-x: 70%;
+  background-size: 75%;
   z-index: -1;
   background-image: url("../assets/chat2.png");
 }
@@ -40,4 +41,10 @@
 .messages {
   overflow-y: auto;
   max-height: 500px;
+}
+
+@media (max-width: 993px) {
+  .jumbo-chat {
+    background-image: url("../assets/chatmobile.png");
+  }
 }
