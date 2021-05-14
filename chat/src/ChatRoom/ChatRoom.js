@@ -18,10 +18,7 @@ const ChatRoom = (props) => {
     };
 
     try {
-      const res = await axios.get(
-        `http://localhost:3030/messages/${roomId}`,
-        headers
-      );
+      const res = await axios.get(`/messages/${roomId}`, headers);
       setOlderMessages(res.data);
     } catch (error) {
       sessionStorage.removeItem("name");
@@ -43,7 +40,7 @@ const ChatRoom = (props) => {
     };
     try {
       const res = await axios.post(
-        `http://localhost:3030/messages/${roomId}`,
+        `/messages/${roomId}`,
         {
           content: newMessage,
           from: name,
