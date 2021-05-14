@@ -26,13 +26,7 @@ const Messages = ({ olderMessages, messages, name }) => {
             key={i}
             className={`message text-break ${
               olderMessage.from === name ? "my-message" : "received-message"
-            }
-            ${
-              olderMessage.from === olderMessages[i - 1]?.from
-                ? "message-merged"
-                : ""
-            }
-            `}
+            }`}
           >
             {olderMessage.content}
           </span>
@@ -53,9 +47,7 @@ const Messages = ({ olderMessages, messages, name }) => {
             key={i}
             className={`message text-break ${
               message.ownedByCurrentUser ? "my-message" : "received-message"
-            }
-            ${message.name === messages[i - 1]?.name ? "message-merged" : ""}
-            `}
+            }`}
           >
             {message.body}
           </span>

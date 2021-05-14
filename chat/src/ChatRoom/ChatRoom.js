@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import useChat from "../useChat";
 import "./ChatRoom.css";
 import { RiSendPlaneLine as Send } from "react-icons/ri";
@@ -12,6 +12,8 @@ const ChatRoom = (props) => {
   const { messages, sendMessage } = useChat(roomId, name); // Creates a websocket and manages messaging
   const [newMessage, setNewMessage] = React.useState(""); // Message to be send
   const [olderMessages, setOlderMessages] = useState([]);
+  const [pressed, setPressed] = useState(false);
+  const inputRef = useRef(null);
 
   const fetchMessages = async () => {
     let headers = {
@@ -28,6 +30,7 @@ const ChatRoom = (props) => {
   };
 
   useEffect(() => {
+    inputRef.current.focus();
     fetchMessages();
   }, []);
 
@@ -37,7 +40,12 @@ const ChatRoom = (props) => {
 
   const handleKeyPressed = (event) => {
     if (event.key === "Enter") {
+      setPressed(true);
       handleSendMessage();
+      setTimeout(() => {
+        setPressed(false);
+        inputRef.current.focus();
+      }, 300);
     }
   };
 
@@ -92,11 +100,14 @@ const ChatRoom = (props) => {
             onKeyPress={handleKeyPressed}
             placeholder="Write message..."
             className="form-control"
+            disabled={pressed}
+            ref={inputRef}
           />{" "}
           <div className="input-group-prepend">
             <button
               onClick={handleSendMessage}
               className="btn btn-lg btn-teal"
+              disabled={pressed}
               style={{ height: "61.19px" }}
             >
               <Send />
