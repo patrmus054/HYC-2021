@@ -97,7 +97,7 @@ const ChatRoom = (props) => {
             <button
               onClick={handleSendMessage}
               className="btn btn-lg btn-teal"
-              style={{ height: "100%" }}
+              style={{ height: "100%", maxHeight: "61.19px" }}
             >
               <Send />
             </button>
