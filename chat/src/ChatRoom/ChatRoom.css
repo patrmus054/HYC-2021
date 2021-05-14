@@ -45,7 +45,6 @@
 
 @media (max-width: 993px) {
   .jumbo-chat {
-    background-size: 75%;
-    background-image: url("../assets/chatmobile.png");
+    background-image: none;
   }
 }
