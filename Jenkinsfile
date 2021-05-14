@@ -14,7 +14,6 @@ pipeline {
 					
 					sh '''	
 					docker rm -vf $(docker ps -a -q)													
-					docker login -u i529998 -p '#MdouTCJg246'
 					cd ./chat
 					docker build -t storefront:latest .
 					docker tag storefront:latest i529998/storefront:latest
@@ -28,7 +27,6 @@ pipeline {
 			steps{
 					
 					sh '''
-					docker login -u i529998 -p '#MdouTCJg246'
 					cd ./board-server
 					docker build -t backend:latest .
 					docker tag backend:latest i529998/backend:latest
