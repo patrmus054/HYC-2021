@@ -66,7 +66,7 @@ const LoginForm = (props) => {
         style={{ paddingTop: 0 }}
       >
         <div className="container">
-          <h1 className="display-4 pt-5">Chatty App</h1>
+          <h1 className="display-4 pt-5">Maklowicz</h1>
           <p className="lead">
             A place to meet new people and chat with them in special topic
             rooms!
