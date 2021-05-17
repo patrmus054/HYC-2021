@@ -40,7 +40,7 @@ const Navbar = () => {
           className="text-light title flex flex-middle flex-justify-around"
         >
           <Logo />
-          Chatty
+          PAPRYK
         </Link>
       </div>
 
